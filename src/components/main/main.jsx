@@ -1,15 +1,16 @@
-import React, {Fragment} from 'react';
+import React, {Fragment} from "react";
+import propTypes from "prop-types";
 
-// eslint-disable-next-line react/prop-types
-const Main = ({promoFilm}) => {
-  // eslint-disable-next-line react/prop-types
+
+const Main = ({promoFilm, films}) => {
+
   const {title, genre, year} = promoFilm;
 
   return (
     <Fragment>
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel"/>
+          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -25,7 +26,7 @@ const Main = ({promoFilm}) => {
 
           <div className="user-block">
             <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
+              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
             </div>
           </div>
         </header>
@@ -33,8 +34,7 @@ const Main = ({promoFilm}) => {
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218"
-                height="327"/>
+              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
@@ -46,7 +46,7 @@ const Main = ({promoFilm}) => {
 
               <div className="movie-card__buttons">
                 <button className="btn btn--play movie-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
+                  <svg className="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
@@ -101,193 +101,18 @@ const Main = ({promoFilm}) => {
           </ul>
 
           <div className="catalog__movies-list">
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-                  alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Fantastic Beasts: The Crimes of
-                  Grindelwald</a>
-              </h3>
-            </article>
 
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Bohemian Rhapsody</a>
-              </h3>
-            </article>
+            {films.map((film, index) => {
 
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Macbeth</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/aviator.jpg" alt="Aviator" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Aviator</a>
-              </h3>
-            </article>
-
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/we-need-to-talk-about-kevin.jpg" alt="We need to talk about Kevin" width="280"
-                  height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">We need to talk about Kevin</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/what-we-do-in-the-shadows.jpg" alt="What We Do in the Shadows" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">What We Do in the Shadows</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/revenant.jpg" alt="Revenant" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Revenant</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/johnny-english.jpg" alt="Johnny English" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Johnny English</a>
-              </h3>
-            </article>
-
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/shutter-island.jpg" alt="Shutter Island" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Shutter Island</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/pulp-fiction.jpg" alt="Pulp Fiction" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Pulp Fiction</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/no-country-for-old-men.jpg" alt="No Country for Old Men" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">No Country for Old Men</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/snatch.jpg" alt="Snatch" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Snatch</a>
-              </h3>
-            </article>
-
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/moonrise-kingdom.jpg" alt="Moonrise Kingdom" width="280" height="175"/>
-
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Moonrise Kingdom</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/seven-years-in-tibet.jpg" alt="Seven Years in Tibet" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Seven Years in Tibet</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/midnight-special.jpg" alt="Midnight Special" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Midnight Special</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/war-of-the-worlds.jpg" alt="War of the Worlds" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">War of the Worlds</a>
-              </h3>
-            </article>
-
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/dardjeeling-limited.jpg" alt="Dardjeeling Limited" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Dardjeeling Limited</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/orlando.jpg" alt="Orlando" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Orlando</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/mindhunter.jpg" alt="Mindhunter" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Mindhunter</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/midnight-special.jpg" alt="Midnight Special" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Midnight Special</a>
-              </h3>
-            </article>
+              return (<article key={index} className="small-movie-card catalog__movies-card">
+                <div className="small-movie-card__image">
+                  <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt={film} width="280" height="175" />
+                </div>
+                <h3 className="small-movie-card__title">
+                  <a className="small-movie-card__link" href="movie-page.html">{film}</a>
+                </h3>
+              </article>);
+            })}
           </div>
 
           <div className="catalog__more">
@@ -311,6 +136,15 @@ const Main = ({promoFilm}) => {
       </div>
     </Fragment>
   );
+};
+
+Main.propTypes = {
+  films: propTypes.arrayOf(propTypes.string).isRequired,
+  promoFilm: propTypes.exact({
+    title: propTypes.string,
+    genre: propTypes.string,
+    year: propTypes.number,
+  }).isRequired,
 };
 
 export default Main;
