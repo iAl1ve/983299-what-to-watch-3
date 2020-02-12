@@ -1,15 +1,16 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app.jsx";
-import {promoFilm, films} from "../../test-data";
+import MovieCard from "./movie-card.jsx";
+import {film} from "../../test-data";
 
 it(`Should WelcomeScreen render correctly`, () => {
   const tree = renderer
-    .create(<App
-      promoFilm={promoFilm}
-      films={films}
+    .create(<MovieCard
+      film={film}
+      onHover={() => {}}
     />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
 });
+

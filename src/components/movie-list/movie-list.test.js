@@ -1,12 +1,11 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app.jsx";
-import {promoFilm, films} from "../../test-data";
+import MovieList from "./movie-list.jsx";
+import {films} from "../../test-data";
 
 it(`Should WelcomeScreen render correctly`, () => {
   const tree = renderer
-    .create(<App
-      promoFilm={promoFilm}
+    .create(<MovieList
       films={films}
     />)
     .toJSON();

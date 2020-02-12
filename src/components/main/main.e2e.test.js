@@ -1,8 +1,8 @@
-import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import Main from './main.jsx';
-import {promoFilm, films} from "../../mockData";
+import React from "react";
+import Enzyme, {shallow} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import Main from "./main";
+import {promoFilm, films} from "../../test-data";
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -20,8 +20,7 @@ it(`Should title be clicked`, () => {
 
   const titlesFilm = main.find(`.small-movie-card__link`);
 
-  titlesFilm.forEach((title) => {
-    title.props().onClick();
-  });
+  titlesFilm.forEach((it) => it.simulate(`click`));
+
   expect(onTitleClick).toHaveBeenCalledTimes(titlesFilm.length);
 });
