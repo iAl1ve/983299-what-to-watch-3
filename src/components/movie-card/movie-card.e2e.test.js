@@ -8,16 +8,17 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
-it(`Should card be hover`, () => {
+it(`Should pass data to handler on hover`, () => {
   const onHover = jest.fn();
   const movieCard = shallow(
       <MovieCard
         film={film}
-        onHover={onHover}
+        onHover={() => onHover(film)}
       />
   );
 
   movieCard.simulate(`mouseover`);
 
   expect(onHover.mock.calls.length).toBe(1);
+  expect(onHover.mock.calls[0][0]).toMatchObject(film);
 });
