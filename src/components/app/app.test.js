@@ -1,3 +1,13 @@
+import React from "react";
+import renderer from "react-test-renderer";
+import App from "./app.jsx";
+
+const promoFilm = {
+  title: `The Grand Budapest Hotel`,
+  genre: `Drama`,
+  releaseDate: 2014,
+};
+
 const films = [
   {
     id: 0,
@@ -16,7 +26,7 @@ const films = [
   {
     id: 1,
     title: `Bohemian Rhapsody`,
-    previewImage: `snatch.jpg`,
+    previewImage: `fantastic-beasts-the-crimes-of-grindelwald.jpg`,
     genre: `Comedy`,
     releaseDate: 2011,
     posterImage: `the-grand-budapest-hotel-poster.jpg`,
@@ -30,7 +40,7 @@ const films = [
   {
     id: 2,
     title: `Macbeth`,
-    previewImage: `orlando.jpg`,
+    previewImage: `fantastic-beasts-the-crimes-of-grindelwald.jpg`,
     genre: `Horror`,
     releaseDate: 2010,
     posterImage: `the-grand-budapest-hotel-poster.jpg`,
@@ -44,7 +54,7 @@ const films = [
   {
     id: 3,
     title: `Aviator`,
-    previewImage: `aviator.jpg`,
+    previewImage: `fantastic-beasts-the-crimes-of-grindelwald.jpg`,
     genre: `Comedy`,
     releaseDate: 2012,
     posterImage: `the-grand-budapest-hotel-poster.jpg`,
@@ -86,7 +96,7 @@ const films = [
   {
     id: 6,
     title: `Revenant`,
-    previewImage: `revenant.jpg`,
+    previewImage: `fantastic-beasts-the-crimes-of-grindelwald.jpg`,
     genre: `Comedy`,
     releaseDate: 2001,
     posterImage: `the-grand-budapest-hotel-poster.jpg`,
@@ -100,7 +110,7 @@ const films = [
   {
     id: 7,
     title: `Johnny English`,
-    previewImage: `johnny-english.jpg`,
+    previewImage: `fantastic-beasts-the-crimes-of-grindelwald.jpg`,
     genre: `Sci-Fi`,
     releaseDate: 2004,
     posterImage: `the-grand-budapest-hotel-poster.jpg`,
@@ -113,4 +123,10 @@ const films = [
   },
 ];
 
-export default films;
+it(`App render correct`, () => {
+  const tree = renderer
+    .create(<App title={promoFilm.title} genre={promoFilm.genre} releaseDate={promoFilm.releaseDate} films={films} />)
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});

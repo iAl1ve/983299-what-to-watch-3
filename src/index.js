@@ -6,10 +6,17 @@ import films from "./mocks/films";
 const promoFilm = {
   title: `The Grand Budapest Hotel`,
   genre: `Drama`,
-  year: 2014
+  releaseDate: 2014,
 };
 
-ReactDOM.render(
-    <App promoFilm={promoFilm} films={films} />,
-    document.getElementById(`root`)
-);
+const init = () => {
+  ReactDOM.render(
+      <App title={promoFilm.title}
+        genre={promoFilm.genre}
+        releaseDate={promoFilm.releaseDate}
+        films={films} />,
+      document.querySelector(`#root`)
+  );
+};
+
+init();
