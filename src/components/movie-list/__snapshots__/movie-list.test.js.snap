@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MovieList /> should render correctly 1`] = `
+Array [
+  <article
+    className="small-movie-card catalog__movies-card"
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <div
+      className="small-movie-card__image"
+    >
+      <video
+        alt=""
+        height="175"
+        poster="Some Path"
+        src="Some Path"
+        width="280"
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+    >
+      <a
+        className="small-movie-card__link"
+        href="movie-page.html"
+        onClick={[Function]}
+      >
+        Some Title
+      </a>
+    </h3>
+  </article>,
+  <article
+    className="small-movie-card catalog__movies-card"
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <div
+      className="small-movie-card__image"
+    >
+      <video
+        alt=""
+        height="175"
+        poster="Some Path"
+        src="Some Path"
+        width="280"
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+    >
+      <a
+        className="small-movie-card__link"
+        href="movie-page.html"
+        onClick={[Function]}
+      >
+        Some Title
+      </a>
+    </h3>
+  </article>,
+]
+`;

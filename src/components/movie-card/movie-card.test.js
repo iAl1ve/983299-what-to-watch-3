@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import MoviePage from "./movie-page";
+import MovieCard from "./movie-card";
 
 const mock = {
   film: {
@@ -17,13 +17,27 @@ const mock = {
     ],
     director: `Some cool directot`,
     starring: [`Actor1`, `Actor2`],
-    id: 2
+    id: 2,
+    videoSrc: `Some Path`,
   }
 };
 
-it(`<MoviePage /> should render correctly`, () => {
+it(`<MovieCard /> should render correctly`, () => {
   const tree = renderer
-    .create(<MoviePage film={mock.film}/>)
+    .create(
+        <MovieCard
+          film={mock.film}
+          onFilmMouseOut={() => {}}
+          onFilmMouseOver={() => {}}
+          onMovieCardClick={() => {}}
+          activeCard={mock.film}
+        />,
+        {
+          createNodeMock: () => {
+            return {};
+          }
+        }
+    )
     .toJSON();
 
   expect(tree).toMatchSnapshot();

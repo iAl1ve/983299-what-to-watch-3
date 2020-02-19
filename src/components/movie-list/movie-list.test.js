@@ -1,13 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app";
+import MovieList from "./movie-list";
 
 const mock = {
-  promoFilm: {
-    promoFilmTitle: `Promo Film`,
-    promoFilmGenre: `Comedy`,
-    promoFilmReleaseYear: 2020,
-  },
   filmsList: [
     {
       title: `Some Title`,
@@ -42,20 +37,20 @@ const mock = {
       starring: [`Actor1`, `Actor2`],
       id: 4,
       videoSrc: `Some Path`,
-    },
+    }
   ]
 };
 
-it(`<App /> should render correctly`, () => {
+it(`<MovieList /> should render correctly`, () => {
   const tree = renderer
-    .create(<App
-      filmsList={mock.filmsList}
-      promoFilm={mock.promoFilm}
-    />, {
-      createNodeMock: () => {
-        return {};
-      }
-    })
+    .create(
+        <MovieList filmsList={mock.filmsList} onMovieCardClick={() => {}} />,
+        {
+          createNodeMock: () => {
+            return {};
+          }
+        }
+    )
     .toJSON();
 
   expect(tree).toMatchSnapshot();

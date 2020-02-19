@@ -1,16 +1,31 @@
 import React from "react";
-import PropTypes from "prop-types";
-import {getRatingLevel} from "../../utils";
+import PropTypes from 'prop-types';
 
-const MoviePage = (props) => {
-  const {film} = props;
-  const {title, genre, releaseDate, posterImage, backgroundImage, ratingScore, ratingCount, description, director, starring} = film;
+const getRatingLevel = (ratingScore) => {
+  if (ratingScore < 3) {
+    return `Bad`;
+  }
+  if (ratingScore >= 3 && ratingScore < 5) {
+    return `Normal`;
+  }
+  if (ratingScore >= 5 && ratingScore < 8) {
+    return `Good`;
+  }
+  if (ratingScore >= 8 && ratingScore < 10) {
+    return `Very good`;
+  }
+  if (ratingScore === 10) {
+    return `Awesome`;
+  }
+  return `No rating`;
+};
 
-  return (<React.Fragment>
+const MoviePage = ({film}) => {
+  return (
     <section className="movie-card movie-card--full">
       <div className="movie-card__hero">
         <div className="movie-card__bg">
-          <img src={`img/${backgroundImage}`} alt={title}/>
+          <img src={film.bgSrc} alt={film.title} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -26,17 +41,17 @@ const MoviePage = (props) => {
 
           <div className="user-block">
             <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
+              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
             </div>
           </div>
         </header>
 
         <div className="movie-card__wrap">
           <div className="movie-card__desc">
-            <h2 className="movie-card__title">{title}</h2>
+            <h2 className="movie-card__title">{film.title}</h2>
             <p className="movie-card__meta">
-              <span className="movie-card__genre">{genre}</span>
-              <span className="movie-card__year">{releaseDate}</span>
+              <span className="movie-card__genre">{film.genre}</span>
+              <span className="movie-card__year">{film.releaseYear}</span>
             </p>
 
             <div className="movie-card__buttons">
@@ -61,7 +76,7 @@ const MoviePage = (props) => {
       <div className="movie-card__wrap movie-card__translate-top">
         <div className="movie-card__info">
           <div className="movie-card__poster movie-card__poster--big">
-            <img src={`img/${posterImage}`} alt={`${title} poster`} width="218" height="327"/>
+            <img src={film.posterSrc} alt={`${film.title} poster`} width="218" height="327" />
           </div>
 
           <div className="movie-card__desc">
@@ -80,99 +95,46 @@ const MoviePage = (props) => {
             </nav>
 
             <div className="movie-rating">
-              <div className="movie-rating__score">{ratingScore}</div>
+              <div className="movie-rating__score">{String(film.ratingScore).replace(`.`, `,`)}</div>
               <p className="movie-rating__meta">
-                <span className="movie-rating__level">{getRatingLevel(ratingScore)}</span>
-                <span className="movie-rating__count">{ratingCount} ratings</span>
+                <span className="movie-rating__level">{getRatingLevel(film.ratingScore)}</span>
+                <span className="movie-rating__count">{`${film.ratingCount} ratings`}</span>
               </p>
             </div>
 
             <div className="movie-card__text">
-              <p>{description}</p>
-              <p className="movie-card__director"><strong>Director: {director}</strong></p>
-              <p className="movie-card__starring"><strong>Starring: {starring.map((actor) => `${actor}`).join(`, `)} and other</strong></p>
+              {film.description.map((el, i) => {
+                return (
+                  <p key={`${i + 1}-descr`}>{el}</p>
+                );
+              })}
+
+              <p className="movie-card__director"><strong>{`Director: ${film.director}`}</strong></p>
+
+              <p className="movie-card__starring"><strong>{`Starring: ${film.starring.reduce((prev, next) => `${prev}, ${next}`)} and other`}</strong></p>
             </div>
           </div>
         </div>
       </div>
     </section>
-
-    <div className="page-content">
-      <section className="catalog catalog--like-this">
-        <h2 className="catalog__title">More like this</h2>
-
-        <div className="catalog__movies-list">
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175"/>
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Fantastic Beasts: The Crimes of
-                Grindelwald</a>
-            </h3>
-          </article>
-
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175"/>
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Bohemian Rhapsody</a>
-            </h3>
-          </article>
-
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175"/>
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Macbeth</a>
-            </h3>
-          </article>
-
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="img/aviator.jpg" alt="Aviator" width="280" height="175"/>
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Aviator</a>
-            </h3>
-          </article>
-        </div>
-      </section>
-
-      <footer className="page-footer">
-        <div className="logo">
-          <a href="main.html" className="logo__link logo__link--light">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </a>
-        </div>
-
-        <div className="copyright">
-          <p>© 2019 What to watch Ltd.</p>
-        </div>
-      </footer>
-    </div>
-  </React.Fragment>);
+  );
 };
 
 MoviePage.propTypes = {
   film: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    releaseDate: PropTypes.number.isRequired,
-    posterImage: PropTypes.string.isRequired,
-    backgroundImage: PropTypes.string.isRequired,
-    ratingScore: PropTypes.number.isRequired,
-    ratingCount: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    director: PropTypes.string.isRequired,
-    starring: PropTypes.arrayOf(PropTypes.string).isRequired,
-  }).isRequired
+    title: PropTypes.string,
+    genre: PropTypes.string,
+    releaseYear: PropTypes.number,
+    imgSrc: PropTypes.string,
+    bgSrc: PropTypes.string,
+    posterSrc: PropTypes.string,
+    ratingScore: PropTypes.number,
+    ratingCount: PropTypes.number,
+    description: PropTypes.arrayOf(PropTypes.string),
+    director: PropTypes.string,
+    starring: PropTypes.arrayOf(PropTypes.string),
+    id: PropTypes.number
+  })
 };
 
 export default MoviePage;
