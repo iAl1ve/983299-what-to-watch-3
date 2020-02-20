@@ -39,14 +39,6 @@ class VideoPlayer extends PureComponent {
     }
   }
 
-  componentWillUnmount() {
-    const video = this._videoRef.current;
-
-    video.onplay = null;
-    video.src = ``;
-    video.muted = false;
-  }
-
   render() {
     const {posterSrc, videoSrc} = this.props;
     return (

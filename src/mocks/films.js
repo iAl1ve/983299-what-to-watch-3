@@ -1,5 +1,3 @@
-let id = 1;
-
 export default [
   {
     title: `Snatch`,
@@ -11,13 +9,46 @@ export default [
     ratingScore: 8.9,
     ratingCount: 240,
     description: [
-      `In the 1930s, the Snatch is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave&apos;s friend and protege.`,
+      `In the 1930s, Snatch is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave&apos;s friend and protege.`,
       `Gustave prides himself on providing first-className service to the hotel&apos;s guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave&apos;s lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.`
     ],
     director: `Wes Andreson`,
     starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
     videoSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-    id: id++
+    id: 1,
+    filmDuration: 99,
+    reviews: [
+      {
+        rating: 8.5,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.6,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.7,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.8,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      }
+    ]
   },
   {
     title: `Fantastic Beasts: The Crimes of Grindelwald`,
@@ -34,7 +65,40 @@ export default [
     director: `David Yates`,
     starring: [`Eddie Redmayne`, `Johnny Depp`, `Ezra Miller`, `Carmen Ejogo`],
     videoSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-    id: id++
+    id: 2,
+    filmDuration: 99,
+    reviews: [
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      }
+    ]
   },
   {
     title: `Bohemian Rhapsody`,
@@ -51,7 +115,40 @@ export default [
     director: `Bryan Singer`,
     starring: [`Rami Malek`, `Lucy Boynton`, `Gwilym Lee`, `Ben Hardy`],
     videoSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-    id: id++
+    id: 3,
+    filmDuration: 99,
+    reviews: [
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      }
+    ]
   },
   {
     title: `Macbeth`,
@@ -68,7 +165,40 @@ export default [
     director: `Justin Kurzel`,
     starring: [`Michael Fassbender`, `Marion Cotillard`, `Paddy Considine`, `Jack Madigan`],
     videoSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-    id: id++
+    id: 4,
+    filmDuration: 99,
+    reviews: [
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      }
+    ]
   },
   {
     title: `Aviator`,
@@ -85,7 +215,40 @@ export default [
     director: `Martin Scorsese`,
     starring: [`Leonardo DiCaprio`, `Cate Blanchett`, `Kate Beckinsale`, `John C. Reilly`],
     videoSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-    id: id++
+    id: 5,
+    filmDuration: 99,
+    reviews: [
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      }
+    ]
   },
   {
     title: `We need to talk about Kevin`,
@@ -102,7 +265,40 @@ export default [
     director: `Lynne Ramsay`,
     starring: [`Tilda Swinton`, `John C. Reilly`, `Ezra Miller`, `Jasper Newell`],
     videoSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-    id: id++
+    id: 6,
+    filmDuration: 99,
+    reviews: [
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      }
+    ]
   },
   {
     title: `What We Do in the Shadows`,
@@ -119,7 +315,40 @@ export default [
     director: `Jemaine Clement`,
     starring: [`Jemaine Clement`, `Taika Waititi`, `Jonny Brugh`, `Cori Gonzalez-Macuer`],
     videoSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-    id: id++
+    id: 7,
+    filmDuration: 99,
+    reviews: [
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      }
+    ]
   },
   {
     title: `Revenant`,
@@ -136,6 +365,39 @@ export default [
     director: `Alejandro G. Iñárritu`,
     starring: [`Leonardo DiCaprio`, `Tom Hardy`, `Domhnall Gleeson`, `Will Poulter`],
     videoSrc: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
-    id: id++
+    id: 8,
+    filmDuration: 99,
+    reviews: [
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      },
+      {
+        rating: 8.9,
+        reviewText: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+        reviewer: `Kate Muir`,
+        reviewDate: `2016-12-24`,
+      }
+    ]
   }
 ];
