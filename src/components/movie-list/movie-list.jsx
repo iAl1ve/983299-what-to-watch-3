@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import MovieCard from "../movie-card/movie-card.jsx";
+import {connect} from "react-redux";
 
 class MovieList extends React.PureComponent {
   constructor(props) {
@@ -53,6 +54,10 @@ class MovieList extends React.PureComponent {
   }
 }
 
+const mapStateToProps = (state) => ({
+  filmsList: state.filmsToRender
+});
+
 MovieList.propTypes = {
   filmsList: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string,
@@ -62,4 +67,6 @@ MovieList.propTypes = {
   onMovieCardClick: PropTypes.func.isRequired,
 };
 
-export default MovieList;
+export {MovieList};
+
+export default connect(mapStateToProps)(MovieList);
