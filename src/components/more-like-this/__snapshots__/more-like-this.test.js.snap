@@ -16,7 +16,7 @@ exports[`<MoreLikeThis /> should render correctly 1`] = `
       className="catalog__movies-list"
     >
       <p>
-        Sorry, there is no more films :(
+        Sorry, the list of films is empty :(
       </p>
     </div>
   </section>

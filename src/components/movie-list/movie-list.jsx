@@ -3,59 +3,57 @@ import PropTypes from 'prop-types';
 import MovieCard from "../movie-card/movie-card.jsx";
 import {connect} from "react-redux";
 
+let timer;
+
 class MovieList extends React.PureComponent {
   constructor(props) {
     super(props);
-
     this.state = {activeCard: {}};
-    this.timerId = null;
-    this.HOVER_DELAY = 1000;
-
     this._handleMovieCardOut = this._handleMovieCardOut.bind(this);
     this._handleMovieCardOver = this._handleMovieCardOver.bind(this);
   }
 
   _handleMovieCardOver(card) {
-    this.timerId = setTimeout(() => {
+    timer = setTimeout(() => {
       this.setState({
         activeCard: card,
       });
-    }, this.HOVER_DELAY);
+    }, 1000);
   }
 
   _handleMovieCardOut() {
-    clearTimeout(this.timerId);
+    clearTimeout(timer);
     this.setState({
       activeCard: {},
     });
   }
 
-  componentWillUnmount() {
-    clearTimeout(this.timerId);
-  }
-
   render() {
-    const {filmsList, onMovieCardClick} = this.props;
+    const {filmsList, onMovieCardClick, filmsToShowCount} = this.props;
     const {activeCard} = this.state;
+    const filmsToRender = filmsList.slice(0, filmsToShowCount);
     return (
-      filmsList.map((el) => {
-        return (
-          <MovieCard
-            key={el.id}
-            film={el}
-            onFilmMouseOut={this._handleMovieCardOut}
-            onFilmMouseOver={this._handleMovieCardOver}
-            onMovieCardClick={onMovieCardClick}
-            activeCard={activeCard}
-          />
-        );
-      })
+      filmsToRender.length === 0 ?
+        <p>There is no films :(</p> :
+        filmsToRender.map((el) => {
+          return (
+            <MovieCard
+              key={el.id}
+              film={el}
+              onFilmMouseOut={this._handleMovieCardOut}
+              onFilmMouseOver={this._handleMovieCardOver}
+              onMovieCardClick={onMovieCardClick}
+              activeCard={activeCard}
+            />
+          );
+        })
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  filmsList: state.filmsToRender
+  filmsList: state.filmsToRender,
+  filmsToShowCount: state.filmsToShowCount
 });
 
 MovieList.propTypes = {
@@ -65,6 +63,7 @@ MovieList.propTypes = {
     id: PropTypes.id,
   })).isRequired,
   onMovieCardClick: PropTypes.func.isRequired,
+  filmsToShowCount: PropTypes.number.isRequired,
 };
 
 export {MovieList};

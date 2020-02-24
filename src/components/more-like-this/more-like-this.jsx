@@ -14,7 +14,7 @@ const MoreLikeThis = ({onMovieCardClick, currentFilm, filmsList}) => {
         <h2 className="catalog__title">More like this</h2>
 
         <div className="catalog__movies-list">
-          {filteredFilmsList.length === 0 ? <p>Sorry, there is no more films :(</p> : <MovieList onMovieCardClick={onMovieCardClick} filmsList={filteredFilmsList}/>}
+          {filteredFilmsList.length === 0 ? <p>Sorry, the list of films is empty :(</p> : <MovieList onMovieCardClick={onMovieCardClick} filmsList={filteredFilmsList}/>}
         </div>
       </section>
     </div>
