@@ -1,92 +1,59 @@
-import React from "react";
-import Main from "../main/main.jsx";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
-import PropTypes from "prop-types";
-import MoviePage from "../movie-page/movie-page.jsx";
-import VideoPlayer from "../video-player/video-player.jsx";
-import {connect} from "react-redux";
+import React, {memo} from 'react';
+import {func, string} from 'prop-types';
+import {connect} from 'react-redux';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {ActionCreator} from '../../reducer';
+import Main from '../main/main.jsx';
+import MovieDetails from '../movie-details/movie-details.jsx';
+import {FilmsType, FilmType} from '../../types';
+import {filterFilmsByGenre} from '../../utils/filterFilmsByGenre';
 
-class App extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {chosenFilm: null};
-    this._renderApp = this._renderApp.bind(this);
-    this._handlerMovieCardClick = this._handlerMovieCardClick.bind(this);
-  }
+const App = (props) => {
+  const {onSelectGenre, films, genreFilter, setActiveItem, activeItem} = props;
 
-  _handlerMovieCardClick(chosenFilm) {
-    this.setState({
-      chosenFilm
-    });
-  }
+  const handleOpenCard = ({name, img, genre}) => {
+    onSelectGenre(genre, films);
+    setActiveItem({name, img, genre});
+  };
 
-  _renderApp() {
-    const {filmsList, promoFilm} = this.props;
-    const {chosenFilm} = this.state;
+  const filteredFilms = filterFilmsByGenre(genreFilter, films);
 
-    if (chosenFilm) {
-      return (
-        <MoviePage film={chosenFilm} onMovieCardClick={this._handlerMovieCardClick} filmsList={filmsList} />
-      );
-    }
-
-    return (
-      <Main
-        promoFilm={promoFilm}
-        onMovieCardClick={this._handlerMovieCardClick}
-      />
-    );
-  }
-
-  render() {
-    const {filmsList} = this.props;
-    return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/">
-            {this._renderApp()}
-          </Route>
-          <Route exact path="/dev-movie-page">
-            <MoviePage onMovieCardClick={this._handlerMovieCardClick} filmsList={filmsList} film={this.state.chosenFilm ? this.state.chosenFilm : this.props.filmsList[0]}/>
-          </Route>
-          <Route exact path="/dev-video-player">
-            <VideoPlayer posterSrc="img/revenant.jpg" isPlaying={false} videoSrc="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"/>
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    );
-  }
-}
-
-App.propTypes = {
-  promoFilm: PropTypes.shape({
-    promoFilmTitle: PropTypes.string,
-    promoFilmGenre: PropTypes.string,
-    promoFilmReleaseYear: PropTypes.number
-  }).isRequired,
-  filmsList: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string,
-    genre: PropTypes.string,
-    releaseYear: PropTypes.number,
-    imgSrc: PropTypes.string,
-    bgSrc: PropTypes.string,
-    posterSrc: PropTypes.string,
-    ratingScore: PropTypes.number,
-    ratingCount: PropTypes.number,
-    description: PropTypes.arrayOf(PropTypes.string),
-    director: PropTypes.string,
-    starring: PropTypes.arrayOf(PropTypes.string),
-    id: PropTypes.number,
-    filmDuration: PropTypes.number,
-    reviews: PropTypes.array,
-  })).isRequired,
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          <Main {...props} onOpenCard={handleOpenCard} filteredFilms={filteredFilms}/>;
+        </Route>
+        <Route path="/dev-component">
+          <MovieDetails cardData={activeItem} onOpenCard={handleOpenCard} filteredFilms={filteredFilms}/>
+        </Route>
+      </Switch>
+    </BrowserRouter>);
 };
 
-const mapStateToProps = (state) => ({
-  promoFilm: state.promoFilm,
-  filmsList: state.filmsList
+App.propTypes = {
+  films: FilmsType,
+  genreFilter: string,
+  onSelectGenre: func,
+  setActiveItem: func,
+  activeItem: FilmType
+};
+
+const mapStateToProps = ({films, genreFilter}) => ({
+  films,
+  genreFilter
 });
 
-export {App};
+const mapDispatchToProps = (dispatch) => ({
+  onSelectGenre: (genre) => {
+    dispatch(ActionCreator.selectGenreFilter(genre));
+  }
+});
 
-export default connect(mapStateToProps)(App);
+const AppWrapper = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(App);
+
+
+export default memo(AppWrapper);

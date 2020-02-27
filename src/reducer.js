@@ -1,75 +1,61 @@
-import {extend} from "./utils";
-import films from './mocks/films';
-import settings from "./mocks/settings";
+import {extend} from "./utils/extend";
+
+const SHOWN_CARDS_STEP = 8;
 
 const initialState = {
-  currentGenre: `All genres`,
-  filmsList: films,
-  filmsToRender: films,
-  promoFilm: settings.PROMO_FILM,
-  filmsToShowCount: 8
+  genres: [],
+  films: [],
+  genreFilter: `All genres`,
+  shownCardsNumber: SHOWN_CARDS_STEP
 };
 
-const ActionTypes = {
-  CHANGE_GENRE: `CHANGE_GENRE`,
-  SET_NEW_FILMS_LIST: `SET_NEW_FILMS_LIST`,
-  SHOW_MORE_FILMS: `SHOW_MORE_FILMS`,
-  RESET_FILMS_COUNT: `RESET_FILMS_COUNT`,
+export const ActionType = {
+  SET_GENRES: `SET_GENRES`,
+  SET_FIMLS: `SET_FILMS`,
+  SELECT_GENRE_FILTER: `SELECT_GENRE_FILTER`,
+  SHOW_MORE_CARDS: `SHOW_MORE_CARDS`
 };
 
-const ActionCreators = {
-  resetFilmsCount: () => ({
-    type: ActionTypes.RESET_FILMS_COUNT
+export const ActionCreator = {
+  setGenres: (list) => ({
+    type: ActionType.SET_GENRES,
+    payload: list
+  }),
+  setFilms: (list) => ({
+    type: ActionType.SET_FIMLS,
+    payload: list
+  }),
+  selectGenreFilter: (genre) => ({
+    type: ActionType.SELECT_GENRE_FILTER,
+    payload: genre
+  }),
+  showMoreCards: () => ({
+    type: ActionType.SHOW_MORE_CARDS
   }),
 
-  changeGenre: (chosenGenre) => ({
-    type: ActionTypes.CHANGE_GENRE,
-    payload: chosenGenre,
-  }),
-
-  setNewFilmsList: () => ({
-    type: ActionTypes.SET_NEW_FILMS_LIST
-  }),
-
-  showMoreFilms: () => ({
-    type: ActionTypes.SHOW_MORE_FILMS,
-    payload: 8,
-  })
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionTypes.RESET_FILMS_COUNT:
+    case ActionType.SET_GENRES:
       return extend(state, {
-        filmsToShowCount: 8
+        genres: action.payload
       });
-
-    case ActionTypes.SHOW_MORE_FILMS:
+    case ActionType.SET_FIMLS:
       return extend(state, {
-        filmsToShowCount: state.filmsToShowCount + action.payload
+        films: action.payload
       });
-
-    case ActionTypes.CHANGE_GENRE:
+    case ActionType.SELECT_GENRE_FILTER:
       return extend(state, {
-        currentGenre: action.payload,
+        genreFilter: action.payload
       });
-
-    case ActionTypes.SET_NEW_FILMS_LIST:
-      const {currentGenre, filmsList} = state;
-
-      if (currentGenre === `All genres`) {
-        return extend(state, {
-          filmsToRender: films
-        });
-      }
-
-      const newFilmsList = filmsList.filter((film) => film.genre === currentGenre);
-
+    case ActionType.SHOW_MORE_CARDS:
       return extend(state, {
-        filmsToRender: newFilmsList
+        shownCardsNumber: state.shownCardsNumber + SHOWN_CARDS_STEP
       });
+    default:
+      return state;
   }
-  return state;
 };
 
-export {reducer, ActionCreators, ActionTypes};
+export default reducer;

@@ -1,8 +1,7 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import React from "react";
+import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
-import {MovieList} from './movie-list';
-import {BrowserRouter as Router} from 'react-router-dom';
+import ShowMoreButton from "./show-more-button";
 import configureStore from "redux-mock-store";
 
 const mockStore = configureStore([]);
@@ -11,36 +10,39 @@ const films = [
   {
     name: `name1`,
     img: `img/name1.jpg`,
+    genre: `test1`,
+    preview: `test1`,
   },
   {
     name: `name2`,
     img: `img/name2.jpg`,
+    genre: `test2`,
+    preview: `test2`,
   },
   {
     name: `name3`,
     img: `img/name3.jpg`,
+    genre: `test3`,
+    preview: `test4`,
   },
 ];
 
-const activeItem = {
-  name: `test`
-};
+const SHOWN_CARDS_NUMBER = 6;
 
-it(`MovieList renders correctly`, () => {
+it(`ShowMoreButton renders correctly`, () => {
   const store = mockStore({
-    films,
+    shownCardsNumber: SHOWN_CARDS_NUMBER,
     filteredFilms: films
   });
+
 
   const {filteredFilms} = store.getState();
 
   const tree = renderer
     .create(
-        <Router>
-          <Provider store={store}>
-            <MovieList filteredFilms={filteredFilms} activeItem={activeItem}/>
-          </Provider>
-        </Router>
+        <Provider store={store}>
+          <ShowMoreButton filteredFilms={filteredFilms}/>
+        </Provider>
     )
     .toJSON();
   expect(tree).toMatchSnapshot();

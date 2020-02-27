@@ -1,71 +1,45 @@
-import React from "react";
-import PropTypes from 'prop-types';
-import MovieCard from "../movie-card/movie-card.jsx";
+import React, {memo} from "react";
+import {string, func, number} from "prop-types";
 import {connect} from "react-redux";
+import MovieCard from "../movie-card/movie-card.jsx";
+import {FilmsType, FilmType} from '../../types';
 
-let timer;
+const MovieList = (props) => {
+  const {shownCardsNumber, activeItem, filteredFilms} = props;
+  const shownFilms = filteredFilms.slice(0, shownCardsNumber);
 
-class MovieList extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {activeCard: {}};
-    this._handleMovieCardOut = this._handleMovieCardOut.bind(this);
-    this._handleMovieCardOver = this._handleMovieCardOver.bind(this);
-  }
-
-  _handleMovieCardOver(card) {
-    timer = setTimeout(() => {
-      this.setState({
-        activeCard: card,
-      });
-    }, 1000);
-  }
-
-  _handleMovieCardOut() {
-    clearTimeout(timer);
-    this.setState({
-      activeCard: {},
-    });
-  }
-
-  render() {
-    const {filmsList, onMovieCardClick, filmsToShowCount} = this.props;
-    const {activeCard} = this.state;
-    const filmsToRender = filmsList.slice(0, filmsToShowCount);
-    return (
-      filmsToRender.length === 0 ?
-        <p>There is no films :(</p> :
-        filmsToRender.map((el) => {
-          return (
-            <MovieCard
-              key={el.id}
-              film={el}
-              onFilmMouseOut={this._handleMovieCardOut}
-              onFilmMouseOver={this._handleMovieCardOver}
-              onMovieCardClick={onMovieCardClick}
-              activeCard={activeCard}
-            />
-          );
-        })
-    );
-  }
-}
-
-const mapStateToProps = (state) => ({
-  filmsList: state.filmsToRender,
-  filmsToShowCount: state.filmsToShowCount
-});
-
-MovieList.propTypes = {
-  filmsList: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string,
-    imgSrc: PropTypes.string,
-    id: PropTypes.id,
-  })).isRequired,
-  onMovieCardClick: PropTypes.func.isRequired,
-  filmsToShowCount: PropTypes.number.isRequired,
+  return (
+    <div className="catalog__movies-list">
+      {shownFilms.map(({name, img, preview, genre}) => (
+        <MovieCard
+          key={name}
+          name={name}
+          img={img}
+          preview={preview}
+          genre={genre}
+          active={name === activeItem.name}
+          {...props}
+        />
+      ))}
+    </div>
+  );
 };
 
-export {MovieList};
+MovieList.propTypes = {
+  activeItem: FilmType,
+  filteredFilms: FilmsType,
+  filter: string,
+  onOpenCard: func,
+  shownCardsNumber: number,
+  setActiveItem: func,
+  removeActiveItem: func,
+  setTimer: func,
+  removeTimer: func,
+};
 
-export default connect(mapStateToProps)(MovieList);
+const mapStateToProps = ({shownCardsNumber}) => ({
+  shownCardsNumber,
+});
+
+export {MovieList};
+export default connect(mapStateToProps)(memo(MovieList));

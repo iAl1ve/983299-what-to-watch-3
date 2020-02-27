@@ -1,141 +1,49 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import React from 'react';
+import renderer from 'react-test-renderer';
+import Main from './main';
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
-import Main from "./main.jsx";
+import {BrowserRouter as Router} from 'react-router-dom';
 
 const mockStore = configureStore([]);
 
-const mock = {
-  promoFilm: {
-    promoFilmTitle: `Promo Film`,
-    promoFilmGenre: `Comedy`,
-    promoFilmReleaseYear: 2020,
-  },
-  filmsList: [
-    {
-      title: `Some Title`,
-      genre: `Comedy`,
-      releaseYear: 2015,
-      imgSrc: `Some Path`,
-      bgSrc: `iSome Path`,
-      posterSrc: `Some Path`,
-      ratingScore: 8.7,
-      ratingCount: 230,
-      description: [
-        `Some description`,
-      ],
-      director: `Some cool directot`,
-      starring: [`Actor1`, `Actor2`],
-      id: 2,
-      videoSrc: `Some Path`,
-      filmDuration: 99,
-      reviews: [
-        {
-          rating: 8.1,
-          reviewText: `Description`,
-          reviewer: `Kate Muiry`,
-          reviewDate: `2016-12-25`,
-        },
-        {
-          rating: 8.1,
-          reviewText: `Description`,
-          reviewer: `Kate Muiry`,
-          reviewDate: `2016-12-25`,
-        },
-        {
-          rating: 8.1,
-          reviewText: `Description`,
-          reviewer: `Kate Muiry`,
-          reviewDate: `2016-12-25`,
-        },
-        {
-          rating: 8.1,
-          reviewText: `Description`,
-          reviewer: `Kate Muiry`,
-          reviewDate: `2016-12-25`,
-        },
-        {
-          rating: 8.1,
-          reviewText: `Description`,
-          reviewer: `Kate Muiry`,
-          reviewDate: `2016-12-25`,
-        }
-      ]
-    },
-    {
-      title: `Some Title`,
-      genre: `Comedy`,
-      releaseYear: 2015,
-      imgSrc: `Some Path`,
-      bgSrc: `iSome Path`,
-      posterSrc: `Some Path`,
-      ratingScore: 8.7,
-      ratingCount: 230,
-      description: [
-        `Some description`,
-      ],
-      director: `Some cool directot`,
-      starring: [`Actor1`, `Actor2`],
-      id: 4,
-      videoSrc: `Some Path`,
-      filmDuration: 99,
-      reviews: [
-        {
-          rating: 8.1,
-          reviewText: `Description`,
-          reviewer: `Kate Muiry`,
-          reviewDate: `2016-12-25`,
-        },
-        {
-          rating: 8.1,
-          reviewText: `Description`,
-          reviewer: `Kate Muiry`,
-          reviewDate: `2016-12-25`,
-        },
-        {
-          rating: 8.1,
-          reviewText: `Description`,
-          reviewer: `Kate Muiry`,
-          reviewDate: `2016-12-25`,
-        },
-        {
-          rating: 8.1,
-          reviewText: `Description`,
-          reviewer: `Kate Muiry`,
-          reviewDate: `2016-12-25`,
-        },
-        {
-          rating: 8.1,
-          reviewText: `Description`,
-          reviewer: `Kate Muiry`,
-          reviewDate: `2016-12-25`,
-        }
-      ]
-    },
-  ]
+const promoData = {
+  name: `promoName`,
+  genre: `promoGenre`,
+  releaseDate: 0,
 };
 
-it(`<Main /> should render correctly`, () => {
-  const {promoFilm, filmsList} = mock;
+const films = [
+  {
+    name: `name1`,
+    img: `img/name1.jpg`,
+  },
+  {
+    name: `name2`,
+    img: `img/name2.jpg`,
+  },
+  {
+    name: `name3`,
+    img: `img/name3.jpg`,
+  },
+];
+
+it(`Main renders correctly`, () => {
   const store = mockStore({
-    currentGenre: `All genres`,
-    filmsToRender: filmsList,
-    filmsToShowCount: 8
+    genres: [`genre1`, `genre2`],
+    genreFilter: `All genres`,
+    films,
+    filteredFilms: films,
   });
+
   const tree = renderer
     .create(
-        <Provider store={store}>
-          <Main
-            promoFilm={promoFilm}
-            onMovieCardClick={() => {}}
-          />
-        </Provider>, {
-          createNodeMock: () => {
-            return {};
-          }
-        })
+        <Router>
+          <Provider store={store}>
+            <Main promoData={promoData} filteredFilms={films}/>
+          </Provider>
+        </Router>
+    )
     .toJSON();
-
   expect(tree).toMatchSnapshot();
 });
