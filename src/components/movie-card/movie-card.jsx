@@ -1,102 +1,70 @@
-import React, {memo} from "react";
-import {string, func, shape, bool} from "prop-types";
-import {Link} from "react-router-dom";
-import Player from "../player/player.jsx";
+import React from "react";
+import PropTypes from 'prop-types';
+import Player from "../movie-video-player/movie-video-player.jsx";
+import withVideo from "../../hocs/with-video/with-video.js";
 
-const SHOW_PREVIEW_DELAY = 1000;
+const VideoPlayer = withVideo(Player);
 
-const MovieCard = ({
-  name,
-  img,
-  preview,
-  genre,
-  setActiveItem,
-  removeActiveItem,
-  setTimer,
-  getTimer,
-  removeTimer,
-  onOpenCard,
-  active
-}) => {
-  const onMouseEnter = () => {
-    const mouseOverTimer = setTimeout(() => {
-      setActiveItem({genre, img, name});
-    }, SHOW_PREVIEW_DELAY);
+let timer;
 
-    setTimer(mouseOverTimer);
-  };
-
-  const onMouseLeave = () => {
-    const timerId = getTimer();
-    removeTimer(timerId);
-
-    removeActiveItem();
-  };
-
-  const onOpenCardWrapper = (e) => {
-    e.preventDefault();
-
-    onOpenCard({
-      name,
-      img,
-      genre
-    });
-  };
+const MovieCard = ({film, onFilmMouseOver, onFilmMouseOut, onMovieCardClick, activeCard}) => {
+  const {title, imgSrc, trailerSrc} = film;
 
   return (
     <article
-      className="small-movie-card catalog__movies-card"
-      key={name}
-      onClick={onOpenCardWrapper}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      style={{
-        position: `relative`
+      onMouseEnter={() => {
+        timer = setTimeout(() => {
+          onFilmMouseOver(film);
+        }, 1000);
       }}
+      onMouseLeave={() => {
+        clearTimeout(timer);
+        onFilmMouseOut({});
+      }}
+      onClick={() => {
+        clearTimeout(timer);
+        onMovieCardClick(film);
+      }}
+      className="small-movie-card catalog__movies-card"
     >
       <div className="small-movie-card__image">
-        <img src={img} alt={name} width="280" height="175" />
+        <VideoPlayer
+          isPlaying={activeCard === film}
+          videoSrc={trailerSrc}
+          posterSrc={imgSrc}
+          isMuted
+          widthAtr={280}
+          heightAtr={175}
+          type={`trailer`}
+        />
       </div>
-      <h3
-        className="small-movie-card__title"
-        style={{
-          width: `100%`,
-          height: `100%`
-        }}
-      >
-        <Link
-          to="/dev-component"
-          className="small-movie-card__link"
-          style={{
-            width: `100%`,
-            height: `100%`,
-            display: `flex`,
-            alignItems: `flex-end`
+      <h3 className="small-movie-card__title">
+        <a
+          onClick={(e) => {
+            e.preventDefault();
+            onMovieCardClick(film);
           }}
+          className="small-movie-card__link"
+          href="movie-page.html"
         >
-          {name}
-        </Link>
+          {title}
+        </a>
       </h3>
-      <Player active={active} src={preview} name={name} img={img} />
     </article>
   );
 };
 
 MovieCard.propTypes = {
-  history: shape({
-    history: func
-  }),
-  name: string,
-  img: string,
-  preview: string,
-  genre: string,
-  setActiveItem: func,
-  removeActiveItem: func,
-  setTimer: func,
-  getTimer: func,
-  removeTimer: func,
-  onOpenCard: func,
-  active: bool
+  film: PropTypes.shape({
+    title: PropTypes.string,
+    imgSrc: PropTypes.string,
+    id: PropTypes.id,
+    trailerSrc: PropTypes.string,
+  }).isRequired,
+  onFilmMouseOver: PropTypes.func.isRequired,
+  onMovieCardClick: PropTypes.func.isRequired,
+  onFilmMouseOut: PropTypes.func.isRequired,
+  activeCard: PropTypes.object.isRequired,
 };
 
-export default memo(MovieCard);
+export default MovieCard;

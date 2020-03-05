@@ -1,47 +1,133 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import {Provider} from "react-redux";
-import {MovieList} from './movie-list';
-import {BrowserRouter as Router} from 'react-router-dom';
-import configureStore from "redux-mock-store";
+import React from "react";
+import renderer from "react-test-renderer";
+import MovieList from "./movie-list.jsx";
 
-const mockStore = configureStore([]);
-
-const films = [
-  {
-    name: `name1`,
-    img: `img/name1.jpg`,
-  },
-  {
-    name: `name2`,
-    img: `img/name2.jpg`,
-  },
-  {
-    name: `name3`,
-    img: `img/name3.jpg`,
-  },
-];
-
-const activeItem = {
-  name: `test`
+const mock = {
+  filmsList: [
+    {
+      title: `Some Title`,
+      trailerSrc: `some path`,
+      genre: `Comedy`,
+      bgColor: `red`,
+      releaseYear: 2015,
+      imgSrc: `Some Path`,
+      bgSrc: `iSome Path`,
+      posterSrc: `Some Path`,
+      ratingScore: 8.7,
+      ratingCount: 230,
+      description: [
+        `Some description`,
+      ],
+      director: `Some cool directot`,
+      starring: [`Actor1`, `Actor2`],
+      id: 2,
+      videoSrc: `Some Path`,
+      filmDuration: 99,
+      reviews: [
+        {
+          rating: 8.1,
+          reviewText: `Description`,
+          reviewer: `Kate Muiry`,
+          reviewDate: `2016-12-25`,
+        },
+        {
+          rating: 8.1,
+          reviewText: `Description`,
+          reviewer: `Kate Muiry`,
+          reviewDate: `2016-12-25`,
+        },
+        {
+          rating: 8.1,
+          reviewText: `Description`,
+          reviewer: `Kate Muiry`,
+          reviewDate: `2016-12-25`,
+        },
+        {
+          rating: 8.1,
+          reviewText: `Description`,
+          reviewer: `Kate Muiry`,
+          reviewDate: `2016-12-25`,
+        },
+        {
+          rating: 8.1,
+          reviewText: `Description`,
+          reviewer: `Kate Muiry`,
+          reviewDate: `2016-12-25`,
+        }
+      ]
+    },
+    {
+      title: `Some Title`,
+      trailerSrc: `some path`,
+      genre: `Comedy`,
+      releaseYear: 2015,
+      imgSrc: `Some Path`,
+      bgSrc: `iSome Path`,
+      posterSrc: `Some Path`,
+      ratingScore: 8.7,
+      bgColor: `red`,
+      ratingCount: 230,
+      description: [
+        `Some description`,
+      ],
+      director: `Some cool directot`,
+      starring: [`Actor1`, `Actor2`],
+      id: 4,
+      videoSrc: `Some Path`,
+      filmDuration: 99,
+      reviews: [
+        {
+          rating: 8.1,
+          reviewText: `Description`,
+          reviewer: `Kate Muiry`,
+          reviewDate: `2016-12-25`,
+        },
+        {
+          rating: 8.1,
+          reviewText: `Description`,
+          reviewer: `Kate Muiry`,
+          reviewDate: `2016-12-25`,
+        },
+        {
+          rating: 8.1,
+          reviewText: `Description`,
+          reviewer: `Kate Muiry`,
+          reviewDate: `2016-12-25`,
+        },
+        {
+          rating: 8.1,
+          reviewText: `Description`,
+          reviewer: `Kate Muiry`,
+          reviewDate: `2016-12-25`,
+        },
+        {
+          rating: 8.1,
+          reviewText: `Description`,
+          reviewer: `Kate Muiry`,
+          reviewDate: `2016-12-25`,
+        }
+      ]
+    },
+  ]
 };
 
-it(`MovieList renders correctly`, () => {
-  const store = mockStore({
-    films,
-    filteredFilms: films
-  });
-
-  const {filteredFilms} = store.getState();
-
+it(`<MovieList /> should render correctly`, () => {
   const tree = renderer
     .create(
-        <Router>
-          <Provider store={store}>
-            <MovieList filteredFilms={filteredFilms} activeItem={activeItem}/>
-          </Provider>
-        </Router>
+        <MovieList
+          filmsToShowCount={8}
+          filmsToRender={mock.filmsList}
+          onMovieCardClick={() => {}}
+          activeItem={{}}
+          onActiveItemChange={() => {}}
+        />,
+        {
+          createNodeMock: () => {
+            return {};
+          }
+        }
     )
     .toJSON();
+
   expect(tree).toMatchSnapshot();
 });

@@ -1,45 +1,36 @@
-import React, {memo} from "react";
-import {string, func, number} from "prop-types";
-import {connect} from "react-redux";
+import React from "react";
+import PropTypes from 'prop-types';
 import MovieCard from "../movie-card/movie-card.jsx";
-import {FilmsType, FilmType} from '../../types';
 
 const MovieList = (props) => {
-  const {shownCardsNumber, activeItem, filteredFilms} = props;
-  const shownFilms = filteredFilms.slice(0, shownCardsNumber);
-
+  const {filmsToRender, onMovieCardClick, activeItem, onActiveItemChange} = props;
   return (
-    <div className="catalog__movies-list">
-      {shownFilms.map(({name, img, preview, genre}) => (
-        <MovieCard
-          key={name}
-          name={name}
-          img={img}
-          preview={preview}
-          genre={genre}
-          active={name === activeItem.name}
-          {...props}
-        />
-      ))}
-    </div>
+    filmsToRender.length === 0 ?
+      <p>There is no films in the library :(</p> :
+      filmsToRender.map((el) => {
+        return (
+          <MovieCard
+            key={el.id}
+            film={el}
+            onFilmMouseOut={onActiveItemChange}
+            onFilmMouseOver={onActiveItemChange}
+            onMovieCardClick={onMovieCardClick}
+            activeCard={activeItem}
+          />
+        );
+      })
   );
 };
 
 MovieList.propTypes = {
-  activeItem: FilmType,
-  filteredFilms: FilmsType,
-  filter: string,
-  onOpenCard: func,
-  shownCardsNumber: number,
-  setActiveItem: func,
-  removeActiveItem: func,
-  setTimer: func,
-  removeTimer: func,
+  filmsToRender: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string,
+    imgSrc: PropTypes.string,
+    id: PropTypes.id,
+  })).isRequired,
+  onMovieCardClick: PropTypes.func.isRequired,
+  activeItem: PropTypes.object.isRequired,
+  onActiveItemChange: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({shownCardsNumber}) => ({
-  shownCardsNumber,
-});
-
-export {MovieList};
-export default connect(mapStateToProps)(memo(MovieList));
+export default MovieList;

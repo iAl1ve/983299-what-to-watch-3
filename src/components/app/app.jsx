@@ -1,84 +1,111 @@
-import React, {memo} from "react";
-import {func, string, bool} from "prop-types";
-import {connect} from "react-redux";
-import {BrowserRouter, Route, Switch} from "react-router-dom";
-import {ActionCreator} from "../../reducer";
+import React from "react";
 import Main from "../main/main.jsx";
-import MovieDetails from "../movie-details/movie-details.jsx";
-import {FilmsType, FilmType} from "../../types";
-import {filterFilmsByGenre} from "../../utils/filter-films-by-genre";
-import VideoPlayer from '../video-player/video-player.jsx';
-import withProgress from '../../hocs/with-progress/with-progress.jsx';
+import {BrowserRouter, Switch, Route} from "react-router-dom";
+import PropTypes from "prop-types";
+import MoviePage from "../movie-page/movie-page.jsx";
+import {connect} from "react-redux";
+import withVideo from "../../hocs/with-video/with-video.js";
+import MovieVideoPlayer from "../movie-video-player/movie-video-player.jsx";
+import {getPromoFilm, getFilmsToRender} from "../../reducer/data/selectors.js";
+import {getChosenFilm, getFilmToWatch} from "../../reducer/app-status/selectors.js";
+import {ActionCreators} from "../../reducer/app-status/app-status.js";
 
-const VideoPlayerWithProgress = withProgress(VideoPlayer);
+const VideoPlayerWrapper = withVideo(MovieVideoPlayer);
 
-const App = (props) => {
-  const {
-    onSelectGenre,
-    films,
-    genreFilter,
-    setActiveItem,
-    activeItem,
-    setActivePlayer,
-    activePlayer
-  } = props;
+const App = ({filmsToRender, promoFilm, chosenFilm, filmToWatch, onMovieCardClick, onPlayFilmButtonClick}) => {
+  const renderApp = () => {
+    if (filmToWatch) {
+      return (
+        <VideoPlayerWrapper
+          title={filmToWatch.title}
+          type={`movie`}
+          className={`player__video`}
+          isPlaying={false}
+          posterSrc={filmToWatch.imgSrc}
+          videoSrc={filmToWatch.videoSrc}
+          onPlayFilmButtonClick={onPlayFilmButtonClick}
+        />
+      );
+    }
 
-  const handleOpenCard = ({name, img, genre}) => {
-    onSelectGenre(genre, films);
-    setActiveItem({name, img, genre});
+
+    if (chosenFilm) {
+      return (
+        <MoviePage onPlayFilmButtonClick={onPlayFilmButtonClick} film={chosenFilm} onMovieCardClick={onMovieCardClick} />
+      );
+    }
+
+    return (
+      <Main
+        promoFilm={promoFilm}
+        onMovieCardClick={onMovieCardClick}
+        onPlayFilmButtonClick={onPlayFilmButtonClick}
+        filmsToRender={filmsToRender}
+      />
+    );
   };
 
-  const filteredFilms = filterFilmsByGenre(genreFilter, films);
-
-  const renderVideoPlayer = () => <VideoPlayerWithProgress setActivePlayer={setActivePlayer}/>;
-  const renderApp = () => (<BrowserRouter>
-    <Switch>
-      <Route exact path="/">
-        <Main
-          {...props}
-          onOpenCard={handleOpenCard}
-          filteredFilms={filteredFilms}
-        />
-      </Route>
-      <Route path="/dev-component">
-        <MovieDetails
-          {...props}
-          cardData={activeItem}
-          onOpenCard={handleOpenCard}
-          filteredFilms={filteredFilms}
-        />
-      </Route>
-    </Switch>
-  </BrowserRouter>);
-
   return (
-    activePlayer
-      ? renderVideoPlayer()
-      : renderApp()
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          {renderApp()}
+        </Route>
+        <Route exact path="/dev-movie-page">
+          <MoviePage onPlayFilmButtonClick={() => {}} onMovieCardClick={onMovieCardClick} film={chosenFilm ? chosenFilm : filmsToRender[0]}/>
+        </Route>
+        <Route exact path="/dev-movie-player">
+          <VideoPlayerWrapper title={`Some Film`} type={`movie`} className={`player__video`} isPlaying={false} posterSrc={`https://upload.wikimedia.org/wikipedia/en/thumb/3/3c/Fantastic_Beasts_-_The_Crimes_of_Grindelwald_Poster.png/220px-Fantastic_Beasts_-_The_Crimes_of_Grindelwald_Poster.png`} videoSrc={`https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`}/>
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 };
 
 App.propTypes = {
-  films: FilmsType,
-  genreFilter: string,
-  onSelectGenre: func,
-  setActiveItem: func,
-  activeItem: FilmType,
-  setActivePlayer: func,
-  activePlayer: bool,
+  promoFilm: PropTypes.shape({
+    promoFilmTitle: PropTypes.string,
+    promoFilmGenre: PropTypes.string,
+    promoFilmReleaseYear: PropTypes.number
+  }).isRequired,
+  filmsToRender: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string,
+    genre: PropTypes.string,
+    releaseYear: PropTypes.number,
+    imgSrc: PropTypes.string,
+    bgSrc: PropTypes.string,
+    posterSrc: PropTypes.string,
+    ratingScore: PropTypes.number,
+    ratingCount: PropTypes.number,
+    description: PropTypes.arrayOf(PropTypes.string),
+    director: PropTypes.string,
+    starring: PropTypes.arrayOf(PropTypes.string),
+    id: PropTypes.number,
+    filmDuration: PropTypes.number,
+    reviews: PropTypes.array,
+  })).isRequired,
+  chosenFilm: PropTypes.object,
+  onMovieCardClick: PropTypes.func.isRequired,
+  filmToWatch: PropTypes.object,
+  onPlayFilmButtonClick: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({films, genreFilter}) => ({
-  films,
-  genreFilter
+const mapStateToProps = (state) => ({
+  promoFilm: getPromoFilm(state),
+  filmsToRender: getFilmsToRender(state),
+  chosenFilm: getChosenFilm(state),
+  filmToWatch: getFilmToWatch(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onSelectGenre: (genre) => {
-    dispatch(ActionCreator.selectGenreFilter(genre));
+  onMovieCardClick: (chosenFilm) => {
+    dispatch(ActionCreators.setChosenFilm(chosenFilm));
+  },
+  onPlayFilmButtonClick: (film) => {
+    dispatch(ActionCreators.setFilmToWatch(film));
   }
 });
 
-const AppWrapper = connect(mapStateToProps, mapDispatchToProps)(App);
+export {App};
 
-export default memo(AppWrapper);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

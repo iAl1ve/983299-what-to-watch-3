@@ -1,41 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {createStore} from 'redux';
-import {Provider} from "react-redux";
-import reducer, {ActionType} from "./reducer";
 import App from "./components/app/app.jsx";
-import films from './mocks/films';
-import withActiveCard from './hocs/with-active-card/with-active-card.jsx';
-import withPlayer from './hocs/with-player/with-player.jsx';
+import {createStore, applyMiddleware} from "redux";
+import reducer from "./reducer/reducer";
+import {composeWithDevTools} from 'redux-devtools-extension';
+import {Provider} from "react-redux";
+import {createAPI} from "./utils/api.js";
+import thunk from "redux-thunk";
+import {Operation as DataOperation} from "./reducer/data/data.js";
 
-const promoData = {
-  name: `The Grand Budapest Hotel`,
-  genre: `Drama`,
-  releaseDate: 2004,
-};
-
-const filmGenres = [`All genres`, ...new Set(films.map((film) => film.genre))];
+const api = createAPI(() => {});
 
 const store = createStore(
     reducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+    composeWithDevTools(
+        applyMiddleware(thunk.withExtraArgument(api))
+    )
 );
 
-store.dispatch({
-  type: ActionType.SET_FIMLS,
-  payload: films
-});
+store.dispatch(DataOperation.loadFilms());
 
-store.dispatch({
-  type: ActionType.SET_GENRES,
-  payload: filmGenres
-});
-
-const WrappedApp = withActiveCard(withPlayer(App));
-
-ReactDOM.render(
-    <Provider store={store}>
-      <WrappedApp promoData={promoData}/>
-    </Provider>,
-    document.querySelector(`#root`)
-);
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById(`root`));

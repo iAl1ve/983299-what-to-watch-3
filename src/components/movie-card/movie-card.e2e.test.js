@@ -1,39 +1,108 @@
-import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import MovieCard from './movie-card';
+import React from "react";
+import Enzyme, {shallow} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import MovieCard from "./movie-card";
+
+const mock = {
+  film: {
+    title: `Some Title`,
+    genre: `Comedy`,
+    trailerSrc: `some path`,
+    releaseYear: 2015,
+    imgSrc: `Some Path`,
+    bgSrc: `iSome Path`,
+    posterSrc: `Some Path`,
+    ratingScore: 8.7,
+    ratingCount: 230,
+    description: [
+      `Some description`,
+    ],
+    director: `Some cool directot`,
+    starring: [`Actor1`, `Actor2`],
+    id: 2,
+    videoSrc: `Some Path`,
+    filmDuration: 99,
+    reviews: [
+      {
+        rating: 8.1,
+        reviewText: `Description`,
+        reviewer: `Kate Muiry`,
+        reviewDate: `2016-12-25`,
+      },
+      {
+        rating: 8.1,
+        reviewText: `Description`,
+        reviewer: `Kate Muiry`,
+        reviewDate: `2016-12-25`,
+      },
+      {
+        rating: 8.1,
+        reviewText: `Description`,
+        reviewer: `Kate Muiry`,
+        reviewDate: `2016-12-25`,
+      },
+      {
+        rating: 8.1,
+        reviewText: `Description`,
+        reviewer: `Kate Muiry`,
+        reviewDate: `2016-12-25`,
+      },
+      {
+        rating: 8.1,
+        reviewText: `Description`,
+        reviewer: `Kate Muiry`,
+        reviewDate: `2016-12-25`,
+      }
+    ]
+  }
+};
 
 Enzyme.configure({
   adapter: new Adapter()
 });
 
-const movieData = {
-  name: `test`,
-};
+it(`Should movie card and title be pressed and got correct data`, () => {
+  const handlerMovieCardClick = jest.fn();
 
-jest.useFakeTimers();
+  const movieCard = shallow(
+      <MovieCard
+        onFilmMouseOver={() => {}}
+        onFilmMouseOut={() => {}}
+        film={mock.film}
+        onMovieCardClick={handlerMovieCardClick}
+        activeCard={mock.film}
+      />
+  );
 
-describe(`MovieCard`, () => {
-  it(`Should mouse enter on card`, () => {
-    const setTimer = jest.fn();
-    const {name, img} = movieData;
-    const movieCard = shallow(
-        <MovieCard name={name} img={img} setTimer={setTimer}/>
-    );
-    movieCard.props().onMouseEnter();
+  const titleButton = movieCard.find(`a.small-movie-card__link`);
+  const movieCardWrapper = movieCard.find(`article`);
 
-    expect(setTimer).toHaveBeenCalledTimes(1);
+  titleButton.simulate(`click`, {preventDefault() {}});
+  movieCardWrapper.simulate(`click`);
 
+  expect(handlerMovieCardClick.mock.calls.length).toBe(2);
+  expect(handlerMovieCardClick.mock.calls[0][0]).toMatchObject(mock.film);
+  expect(handlerMovieCardClick.mock.calls[1][0]).toMatchObject(mock.film);
+});
 
-  });
+it(`HandlerOnMouseEnter get correct data`, () => {
+  const handlerOnMouseEnter = jest.fn((...args) => [...args]);
 
-  it(`Should card be clicked`, () => {
-    const onClick = jest.fn();
-    const movieCard = shallow(
-        <MovieCard onOpenCard={onClick}/>
-    );
+  const movieCard = shallow(
+      <MovieCard
+        film={mock.film}
+        onFilmMouseOver={handlerOnMouseEnter}
+        onFilmMouseOut={() => {}}
+        onMovieCardClick={() => {}}
+        activeCard={mock.film}
+      />
+  );
 
-    movieCard.simulate(`click`, {preventDefault() {}});
-    expect(onClick).toHaveBeenCalledTimes(1);
-  });
+  const card = movieCard.find(`article`);
+  card.simulate(`mouseEnter`);
+
+  setTimeout(() => {
+    expect(handlerOnMouseEnter.mock.calls.length).toBe(1);
+    expect(handlerOnMouseEnter.mock.calls[0][0]).toMatchObject(mock.film);
+  }, 1100);
 });

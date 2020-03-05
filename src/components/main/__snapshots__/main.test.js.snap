@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Main renders correctly 1`] = `
+exports[`<Main /> should render correctly 1`] = `
 Array [
   <section
     className="movie-card"
@@ -9,8 +9,7 @@ Array [
       className="movie-card__bg"
     >
       <img
-        alt="The Grand Budapest Hotel"
-        src="img/bg-the-grand-budapest-hotel.jpg"
+        alt="Promo Film"
       />
     </div>
     <h1
@@ -69,9 +68,8 @@ Array [
           className="movie-card__poster"
         >
           <img
-            alt="The Grand Budapest Hotel poster"
+            alt="Promo Film poster"
             height="327"
-            src="img/the-grand-budapest-hotel-poster.jpg"
             width="218"
           />
         </div>
@@ -81,7 +79,7 @@ Array [
           <h2
             className="movie-card__title"
           >
-            promoName
+            Promo Film
           </h2>
           <p
             className="movie-card__meta"
@@ -89,12 +87,12 @@ Array [
             <span
               className="movie-card__genre"
             >
-              promoGenre
+              Comedy
             </span>
             <span
               className="movie-card__year"
             >
-              0
+              2020
             </span>
           </p>
           <div
@@ -106,18 +104,12 @@ Array [
               type="button"
             >
               <svg
-                fill="#d9cd8d"
-                height="24"
-                viewBox="0 0 24 24"
-                width="24"
-                xmlns="http://www.w3.org/2000/svg"
+                height="19"
+                viewBox="0 0 19 19"
+                width="19"
               >
-                <path
-                  d="M8 5v14l11-7z"
-                />
-                <path
-                  d="M0 0h24v24H0z"
-                  fill="none"
+                <use
+                  xlinkHref="#play-s"
                 />
               </svg>
               <span>
@@ -161,14 +153,14 @@ Array [
         className="catalog__genres-list"
       >
         <li
-          className="catalog__genres-item "
+          className="catalog__genres-item catalog__genres-item--active"
         >
           <a
             className="catalog__genres-link"
             href="#"
             onClick={[Function]}
           >
-            genre1
+            All genres
           </a>
         </li>
         <li
@@ -179,7 +171,95 @@ Array [
             href="#"
             onClick={[Function]}
           >
-            genre2
+            Comedy
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item "
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            Crime
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item "
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            Adventure
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item "
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            Drama
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item "
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            Action
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item "
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            Fantasy
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item "
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            Romance
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item "
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            Sci-Fi
+          </a>
+        </li>
+        <li
+          className="catalog__genres-item "
+        >
+          <a
+            className="catalog__genres-link"
+            href="#"
+            onClick={[Function]}
+          >
+            Thriller
           </a>
         </li>
       </ul>
@@ -191,45 +271,28 @@ Array [
           onClick={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
-          style={
-            Object {
-              "position": "relative",
-            }
-          }
         >
           <div
             className="small-movie-card__image"
           >
-            <img
-              alt="name1"
-              height="175"
-              src="img/name1.jpg"
-              width="280"
+            <video
+              alt=""
+              className=""
+              height={175}
+              poster="Some Path"
+              src="some path"
+              width={280}
             />
           </div>
           <h3
             className="small-movie-card__title"
-            style={
-              Object {
-                "height": "100%",
-                "width": "100%",
-              }
-            }
           >
             <a
               className="small-movie-card__link"
-              href="/dev-component"
+              href="movie-page.html"
               onClick={[Function]}
-              style={
-                Object {
-                  "alignItems": "flex-end",
-                  "display": "flex",
-                  "height": "100%",
-                  "width": "100%",
-                }
-              }
             >
-              name1
+              Some Title
             </a>
           </h3>
         </article>
@@ -238,134 +301,49 @@ Array [
           onClick={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
-          style={
-            Object {
-              "position": "relative",
-            }
-          }
         >
           <div
             className="small-movie-card__image"
           >
-            <img
-              alt="name2"
-              height="175"
-              src="img/name2.jpg"
-              width="280"
+            <video
+              alt=""
+              className=""
+              height={175}
+              poster="Some Path"
+              src="some path"
+              width={280}
             />
           </div>
           <h3
             className="small-movie-card__title"
-            style={
-              Object {
-                "height": "100%",
-                "width": "100%",
-              }
-            }
           >
             <a
               className="small-movie-card__link"
-              href="/dev-component"
+              href="movie-page.html"
               onClick={[Function]}
-              style={
-                Object {
-                  "alignItems": "flex-end",
-                  "display": "flex",
-                  "height": "100%",
-                  "width": "100%",
-                }
-              }
             >
-              name2
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          style={
-            Object {
-              "position": "relative",
-            }
-          }
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="name3"
-              height="175"
-              src="img/name3.jpg"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-            style={
-              Object {
-                "height": "100%",
-                "width": "100%",
-              }
-            }
-          >
-            <a
-              className="small-movie-card__link"
-              href="/dev-component"
-              onClick={[Function]}
-              style={
-                Object {
-                  "alignItems": "flex-end",
-                  "display": "flex",
-                  "height": "100%",
-                  "width": "100%",
-                }
-              }
-            >
-              name3
+              Some Title
             </a>
           </h3>
         </article>
       </div>
       <div
         className="catalog__more"
-      />
-    </section>
-    <footer
-      className="page-footer"
-    >
-      <div
-        className="logo"
+        style={
+          Object {
+            "display": "none",
+          }
+        }
       >
-        <a
-          className="logo__link logo__link--light"
+        <button
+          className="catalog__button"
+          onClick={[Function]}
+          type="button"
         >
-          <span
-            className="logo__letter logo__letter--1"
-          >
-            W
-          </span>
-          <span
-            className="logo__letter logo__letter--2"
-          >
-            T
-          </span>
-          <span
-            className="logo__letter logo__letter--3"
-          >
-            W
-          </span>
-        </a>
+          Show more
+        </button>
       </div>
-      <div
-        className="copyright"
-      >
-        <p>
-          © 2019 What to watch Ltd.
-        </p>
-      </div>
-    </footer>
+    </section>
   </div>,
 ]
 `;

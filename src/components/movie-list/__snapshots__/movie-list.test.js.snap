@@ -1,149 +1,66 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MovieList renders correctly 1`] = `
-<div
-  className="catalog__movies-list"
->
+exports[`<MovieList /> should render correctly 1`] = `
+Array [
   <article
     className="small-movie-card catalog__movies-card"
     onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
-    style={
-      Object {
-        "position": "relative",
-      }
-    }
   >
     <div
       className="small-movie-card__image"
     >
-      <img
-        alt="name1"
-        height="175"
-        src="img/name1.jpg"
-        width="280"
+      <video
+        alt=""
+        className=""
+        height={175}
+        poster="Some Path"
+        src="some path"
+        width={280}
       />
     </div>
     <h3
       className="small-movie-card__title"
-      style={
-        Object {
-          "height": "100%",
-          "width": "100%",
-        }
-      }
     >
       <a
         className="small-movie-card__link"
-        href="/dev-component"
+        href="movie-page.html"
         onClick={[Function]}
-        style={
-          Object {
-            "alignItems": "flex-end",
-            "display": "flex",
-            "height": "100%",
-            "width": "100%",
-          }
-        }
       >
-        name1
+        Some Title
       </a>
     </h3>
-  </article>
+  </article>,
   <article
     className="small-movie-card catalog__movies-card"
     onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
-    style={
-      Object {
-        "position": "relative",
-      }
-    }
   >
     <div
       className="small-movie-card__image"
     >
-      <img
-        alt="name2"
-        height="175"
-        src="img/name2.jpg"
-        width="280"
+      <video
+        alt=""
+        className=""
+        height={175}
+        poster="Some Path"
+        src="some path"
+        width={280}
       />
     </div>
     <h3
       className="small-movie-card__title"
-      style={
-        Object {
-          "height": "100%",
-          "width": "100%",
-        }
-      }
     >
       <a
         className="small-movie-card__link"
-        href="/dev-component"
+        href="movie-page.html"
         onClick={[Function]}
-        style={
-          Object {
-            "alignItems": "flex-end",
-            "display": "flex",
-            "height": "100%",
-            "width": "100%",
-          }
-        }
       >
-        name2
+        Some Title
       </a>
     </h3>
-  </article>
-  <article
-    className="small-movie-card catalog__movies-card"
-    onClick={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-    style={
-      Object {
-        "position": "relative",
-      }
-    }
-  >
-    <div
-      className="small-movie-card__image"
-    >
-      <img
-        alt="name3"
-        height="175"
-        src="img/name3.jpg"
-        width="280"
-      />
-    </div>
-    <h3
-      className="small-movie-card__title"
-      style={
-        Object {
-          "height": "100%",
-          "width": "100%",
-        }
-      }
-    >
-      <a
-        className="small-movie-card__link"
-        href="/dev-component"
-        onClick={[Function]}
-        style={
-          Object {
-            "alignItems": "flex-end",
-            "display": "flex",
-            "height": "100%",
-            "width": "100%",
-          }
-        }
-      >
-        name3
-      </a>
-    </h3>
-  </article>
-</div>
+  </article>,
+]
 `;
