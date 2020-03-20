@@ -1,66 +1,76 @@
-import {extend} from "../../utils/utils";
-import {ActionCreators as AppActionCreators} from '../app-status/app-status.js';
-
-const AuthorizationStatus = {
-  AUTH: `AUTH`,
-  NO_AUTH: `NO_AUTH`,
-};
+import {AUTH, NO_AUTH} from '../../utils/consts.js';
+import {extend} from "../../utils/extend";
+import {keysToCamel} from '../../utils/toCamel';
 
 const initialState = {
-  authorizationStatus: AuthorizationStatus.NO_AUTH,
+  authorizationStatus: NO_AUTH,
+  user: {},
+  error: ``
 };
 
-const ActionTypes = {
-  REQUIRE_AUTHORIZATION: `REQUIRE_AUTHORIZATION`,
+export const ActionType = {
+  SET_AUTH: `SET_AUTH`,
+  SET_USER: `SET_USER`,
+  SET_ERROR: `SET_ERROR`,
 };
 
-const ActionCreators = {
-  requireAuthorization: (status) => {
-    return {
-      type: ActionTypes.REQUIRE_AUTHORIZATION,
-      payload: status,
-    };
-  },
+export const ActionCreator = {
+  setAuth: (status) => ({
+    type: ActionType.SET_AUTH,
+    payload: status
+  }),
+  setUser: (data) => ({
+    type: ActionType.SET_USER,
+    payload: data
+  }),
+  setError: (error) => ({
+    type: ActionType.SET_ERROR,
+    payload: error
+  }),
 };
 
-const Operation = {
-  checkAuth: () => (dispatch, getState, api) => {
-    return api.get(`/login`)
-      .then(() => {
-        dispatch(ActionCreators.requireAuthorization(AuthorizationStatus.AUTH));
-      })
-      .catch((err) => {
-        throw err;
-      });
-  },
-
-  login: (authData) => (dispatch, getState, api) => {
-    return api.post(`/login`, {
-      email: authData.login,
-      password: authData.password,
+export const Operation = {
+  check: () => (dispatch, _, api) => {
+    return api.get(`/login`).then(({data}) => {
+      dispatch(ActionCreator.setAuth(AUTH));
+      dispatch(ActionCreator.setUser(keysToCamel(data)));
+      dispatch(ActionCreator.setError(``));
     })
-      .then(() => {
-        dispatch(ActionCreators.requireAuthorization(AuthorizationStatus.AUTH));
-        dispatch(AppActionCreators.changeLoggingStatus());
-      });
+    .catch((error) => {
+      dispatch(ActionCreator.setError(`Failed check auth. Error: ${error}`));
+    });
+  },
+  login: ({email, password}) => (dispatch, _, api) => {
+    return api.post(`/login`, {
+      email,
+      password
+    }).then(({data}) => {
+      dispatch(ActionCreator.setAuth(AUTH));
+      dispatch(ActionCreator.setUser(keysToCamel(data)));
+      dispatch(ActionCreator.setError(``));
+    })
+    .catch((error) => {
+      dispatch(ActionCreator.setError(`Failed login. Error: ${error}`));
+    });
   },
 };
 
-const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionTypes.REQUIRE_AUTHORIZATION:
+    case ActionType.SET_AUTH:
       return extend(state, {
-        authorizationStatus: action.payload,
+        authorizationStatus: action.payload
       });
+    case ActionType.SET_USER:
+      return extend(state, {
+        user: action.payload
+      });
+    case ActionType.SET_ERROR:
+      return extend(state, {
+        error: action.payload
+      });
+    default:
+      return state;
   }
-
-  return state;
 };
 
-export {
-  ActionCreators,
-  ActionTypes,
-  reducer,
-  Operation,
-  AuthorizationStatus
-};
